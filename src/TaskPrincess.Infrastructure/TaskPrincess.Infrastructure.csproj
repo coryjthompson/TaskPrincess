@@ -1,5 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+  <ItemGroup>
+    <ProjectReference Include="..\TaskPrincess.Application\TaskPrincess.Application.csproj" />
+    <ProjectReference Include="..\TaskPrincess.Domain\TaskPrincess.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Text.Json" Version="4.7.1" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>

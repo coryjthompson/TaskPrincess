@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using Xunit;
 
-namespace TaskPrincess.Application.UnitTests
+namespace TaskPrincess.Infrastructure.IntegrationTests
 {
     public class UnitTest1
     {

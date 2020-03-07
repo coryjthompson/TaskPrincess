@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskPrincess.Application.Un
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskPrincess.Domain.UnitTests", "tests\TaskPrincess.Domain.UnitTests\TaskPrincess.Domain.UnitTests.csproj", "{96AC9999-C488-4EE0-A2A7-D5F29E0D1C5F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskPrincess.Infrastructure.IntegrationTests", "tests\TaskPrincess.Infrastructure.IntegrationTests\TaskPrincess.Infrastructure.IntegrationTests.csproj", "{21B4E13A-BC3B-490A-8ABF-58789A3A6128}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -104,6 +106,18 @@ Global
 		{96AC9999-C488-4EE0-A2A7-D5F29E0D1C5F}.Release|x64.Build.0 = Release|Any CPU
 		{96AC9999-C488-4EE0-A2A7-D5F29E0D1C5F}.Release|x86.ActiveCfg = Release|Any CPU
 		{96AC9999-C488-4EE0-A2A7-D5F29E0D1C5F}.Release|x86.Build.0 = Release|Any CPU
+		{21B4E13A-BC3B-490A-8ABF-58789A3A6128}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21B4E13A-BC3B-490A-8ABF-58789A3A6128}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21B4E13A-BC3B-490A-8ABF-58789A3A6128}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{21B4E13A-BC3B-490A-8ABF-58789A3A6128}.Debug|x64.Build.0 = Debug|Any CPU
+		{21B4E13A-BC3B-490A-8ABF-58789A3A6128}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{21B4E13A-BC3B-490A-8ABF-58789A3A6128}.Debug|x86.Build.0 = Debug|Any CPU
+		{21B4E13A-BC3B-490A-8ABF-58789A3A6128}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21B4E13A-BC3B-490A-8ABF-58789A3A6128}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21B4E13A-BC3B-490A-8ABF-58789A3A6128}.Release|x64.ActiveCfg = Release|Any CPU
+		{21B4E13A-BC3B-490A-8ABF-58789A3A6128}.Release|x64.Build.0 = Release|Any CPU
+		{21B4E13A-BC3B-490A-8ABF-58789A3A6128}.Release|x86.ActiveCfg = Release|Any CPU
+		{21B4E13A-BC3B-490A-8ABF-58789A3A6128}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{E74AECB7-3552-468F-86AE-518FC2512977} = {2C754C68-2BC6-47F5-8D13-967726E4EFDA}
@@ -112,5 +126,6 @@ Global
 		{9483740A-359E-4F41-8AF0-100112538F69} = {2C754C68-2BC6-47F5-8D13-967726E4EFDA}
 		{6D02C2E7-B09F-43E0-BA62-153D1DDB2414} = {AC6757B0-6FB3-4664-BE3B-4EF171CB7DFD}
 		{96AC9999-C488-4EE0-A2A7-D5F29E0D1C5F} = {AC6757B0-6FB3-4664-BE3B-4EF171CB7DFD}
+		{21B4E13A-BC3B-490A-8ABF-58789A3A6128} = {AC6757B0-6FB3-4664-BE3B-4EF171CB7DFD}
 	EndGlobalSection
 EndGlobal
