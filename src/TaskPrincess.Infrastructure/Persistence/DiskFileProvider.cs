@@ -10,10 +10,7 @@ namespace TaskPrincess.Infrastructure.Persistence
 
         public IEnumerable<string> ReadLines()
         {
-            foreach (var item in File.ReadLines(FilePath))
-            {
-                yield return item;
-            }
+            return File.ReadLines(FilePath);
         }
 
         public void AppendLine(string line)
