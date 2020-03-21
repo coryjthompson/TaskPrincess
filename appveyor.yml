@@ -1,12 +1,16 @@
 ---
 version: 0.0.{build}
 image:
-  - Visual Studio 2019
   - Ubuntu1804
-  - macos
+environment:
+  SONAR_LOGIN:
+    secure: bnQUNyXHBXRKsEgv6khzKvz0llHlf3w7eaX1FiD9Qr9rVrzh2z5qYTv8d4qtMVjv
 before_build:
   - dotnet restore
+  - dotnet tool install --global dotnet-sonarscanner
 build_script:
+  - dotnet sonarscanner begin /k:"coryjthompson_TaskPrincess" /d:"sonar.host.url=https://sonarcloud.io" /o:"coryjthompson" /d:"sonar.login=$SONAR_LOGIN"
   - dotnet build
+  - dotnet sonarscanner end /d:"sonar.login=$SONAR_LOGIN"
 test_script:
   - dotnet test
