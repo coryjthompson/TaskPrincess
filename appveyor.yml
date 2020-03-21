@@ -8,7 +8,7 @@ environment:
 before_build:
   - dotnet restore
   - dotnet tool install --global dotnet-sonarscanner
-  - dotnet tool install —-global coverlet.console
+  - dotnet tool install --global coverlet.console
   - find tests -type f -name "*.csproj" -exec dotnet add {} package coverlet.msbuild \;
 test_script:
   - dotnet test /p:CollectCoverage=true /p:CoverletOutput=../CoverageResults/ /p:CoverletOutputFormat=\"opencover\" -m:1
