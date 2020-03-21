@@ -10,9 +10,9 @@ before_build:
   - dotnet tool install --global dotnet-sonarscanner
   - dotnet tool install --global coverlet.console
   - find tests -type f -name "*.csproj" -exec dotnet add {} package coverlet.msbuild \;
-test_script:
-  - dotnet test /p:CollectCoverage=true /p:CoverletOutput=../CoverageResults/ /p:CoverletOutputFormat=\"opencover\" -m:1
 build_script:
   - dotnet sonarscanner begin /k:"coryjthompson_TaskPrincess" /d:"sonar.host.url=https://sonarcloud.io" /o:"coryjthompson" /d:"sonar.login=$SONAR_LOGIN" /d:sonar.cs.opencover.reportsPaths=tests/CoverageResults/coverage.opencover.xml /d:sonar.coverage.exclusions="**Test*.cs"
   - dotnet build
+test_script:
+  - dotnet test /p:CollectCoverage=true /p:CoverletOutput=../CoverageResults/ /p:CoverletOutputFormat=\"opencover\" -m:1
   - dotnet sonarscanner end /d:"sonar.login=$SONAR_LOGIN"
