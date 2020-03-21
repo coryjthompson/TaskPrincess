@@ -39,11 +39,40 @@ public interface IFilterVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitQuery([NotNull] FilterParser.QueryContext context);
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="FilterParser.expression"/>.
+	/// Visit a parse tree produced by the <c>ParenthesesExpression</c>
+	/// labeled alternative in <see cref="FilterParser.expression"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitExpression([NotNull] FilterParser.ExpressionContext context);
+	Result VisitParenthesesExpression([NotNull] FilterParser.ParenthesesExpressionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>FilterIdExpression</c>
+	/// labeled alternative in <see cref="FilterParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitFilterIdExpression([NotNull] FilterParser.FilterIdExpressionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>BinaryExpression</c>
+	/// labeled alternative in <see cref="FilterParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitBinaryExpression([NotNull] FilterParser.BinaryExpressionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>PredicateExpression</c>
+	/// labeled alternative in <see cref="FilterParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitPredicateExpression([NotNull] FilterParser.PredicateExpressionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>FilterTagsExpression</c>
+	/// labeled alternative in <see cref="FilterParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitFilterTagsExpression([NotNull] FilterParser.FilterTagsExpressionContext context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="FilterParser.filter_id"/>.
 	/// </summary>

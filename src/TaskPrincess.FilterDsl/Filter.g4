@@ -7,11 +7,11 @@ grammar Filter;
 query : expression ;
 
 expression
-    :   expression binary_operator? expression
-    |   predicate
-    |   filter_id
-    |   filter_tags
-    |   '(' expression ')'
+    :   expression binary_operator? expression    #BinaryExpression
+    |   predicate                                 #PredicateExpression
+    |   filter_id                                 #FilterIdExpression 
+    |   filter_tags                               #FilterTagsExpression
+    |   '(' expression ')'                        #ParenthesesExpression
     ;
 
 filter_id
@@ -92,28 +92,27 @@ AND      : ',' | 'and' | 'AND' ;
 OR       : 'or' | 'OR' ;
 XOR      : 'xor' | 'XOR' ;
 
-COLON    : ':' ;
-NOT        : 'NOT' | 'not';
-BEFORE     : 'BEFORE' | 'before' | 'BELOW' | 'below' ;
-AFTER      : 'AFTER' | 'after' | 'ABOVE' | 'above' ;
-NONE       : 'NONE' | 'none' ;
-ANY        : 'ANY' | 'any' ;
-MEQUALS    : 'EQUALS' | 'equals' | 'IS' | 'is' ;
-ISNT       : 'ISNT' | 'isnt' ;
-HAS        : 'HAS' | 'has' | 'CONTAINS' | 'contains' ;
-HASNT      : 'HASNT' | 'hasnt' ;
-STARTS_WITH : 'STARTS_WITH' | 'startswith' | 'LEFT' | 'left' ;
-ENDS_WITH   : 'ENDS_WITH' | 'endswith' | 'RIGHT' | 'right' ;
-MWORD      : 'WORD' | 'word' ;
-NO_WORD     : 'NO_WORD' | 'noword' ;
+COLON        : ':' ;
+NOT          : 'NOT' | 'not';
+BEFORE       : 'BEFORE' | 'before' | 'BELOW' | 'below' ;
+AFTER        : 'AFTER' | 'after' | 'ABOVE' | 'above' ;
+NONE         : 'NONE' | 'none' ;
+ANY          : 'ANY' | 'any' ;
+MEQUALS      : 'EQUALS' | 'equals' | 'IS' | 'is' ;
+ISNT         : 'ISNT' | 'isnt' ;
+HAS          : 'HAS' | 'has' | 'CONTAINS' | 'contains' ;
+HASNT        : 'HASNT' | 'hasnt' ;
+STARTS_WITH  : 'STARTS_WITH' | 'startswith' | 'LEFT' | 'left' ;
+ENDS_WITH    : 'ENDS_WITH' | 'endswith' | 'RIGHT' | 'right' ;
+MWORD        : 'WORD' | 'word' ;
+NO_WORD      : 'NO_WORD' | 'noword' ;
 
 LESS_THAN_OR_EQUAL_TO    : '<=' ;
 GREATER_THAN_OR_EQUAL_TO : '>=' ;
-LESS_THAN             : '<' ;
-GREATER_THAN          : '>' ;
-NOT_EQUAL             : '!=' '=' ? ;
-EQUALS               : '=' '=' ? ;
-
+LESS_THAN                : '<' ;
+GREATER_THAN             : '>' ;
+NOT_EQUAL                : '!=' '=' ? ;
+EQUALS                   : '=' '=' ? ;
 
 TAG      : '+' WORD
          | '-' WORD

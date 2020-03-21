@@ -116,6 +116,23 @@ namespace TaskPrincess.FilterDslTest
         }
 
         [Fact]
+        public void TestQuery_MultipleBinaryOperators()
+        {
+            var query = BuildQuery("project:castle OR id:5 AND project:adventure");
+            Assert.True(query.Invoke(_adventureProject));
+            Assert.False(query.Invoke(_castleProject));
+        }
+
+        [Fact]
+        public void TestQuery_ParenthesesBinaryOperators()
+        {
+
+            var query = BuildQuery("project:castle OR (id:10 AND project:adventure)");
+            Assert.False(query.Invoke(_adventureProject));
+            Assert.True(query.Invoke(_castleProject));
+        }
+
+        [Fact]
         public void TestQuery_BinaryXorOperator()
         {
             var query = BuildQuery("project:castle XOR id:5");

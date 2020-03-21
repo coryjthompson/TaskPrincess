@@ -132,15 +132,40 @@ public partial class FilterParser : Parser {
 	}
 
 	public partial class ExpressionContext : ParserRuleContext {
-		public PredicateContext predicate() {
-			return GetRuleContext<PredicateContext>(0);
+		public ExpressionContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
 		}
+		public override int RuleIndex { get { return RULE_expression; } }
+	 
+		public ExpressionContext() { }
+		public virtual void CopyFrom(ExpressionContext context) {
+			base.CopyFrom(context);
+		}
+	}
+	public partial class ParenthesesExpressionContext : ExpressionContext {
+		public ExpressionContext expression() {
+			return GetRuleContext<ExpressionContext>(0);
+		}
+		public ParenthesesExpressionContext(ExpressionContext context) { CopyFrom(context); }
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IFilterVisitor<TResult> typedVisitor = visitor as IFilterVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitParenthesesExpression(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+	public partial class FilterIdExpressionContext : ExpressionContext {
 		public Filter_idContext filter_id() {
 			return GetRuleContext<Filter_idContext>(0);
 		}
-		public Filter_tagsContext filter_tags() {
-			return GetRuleContext<Filter_tagsContext>(0);
+		public FilterIdExpressionContext(ExpressionContext context) { CopyFrom(context); }
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IFilterVisitor<TResult> typedVisitor = visitor as IFilterVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFilterIdExpression(this);
+			else return visitor.VisitChildren(this);
 		}
+	}
+	public partial class BinaryExpressionContext : ExpressionContext {
 		public ExpressionContext[] expression() {
 			return GetRuleContexts<ExpressionContext>();
 		}
@@ -150,14 +175,32 @@ public partial class FilterParser : Parser {
 		public Binary_operatorContext binary_operator() {
 			return GetRuleContext<Binary_operatorContext>(0);
 		}
-		public ExpressionContext(ParserRuleContext parent, int invokingState)
-			: base(parent, invokingState)
-		{
-		}
-		public override int RuleIndex { get { return RULE_expression; } }
+		public BinaryExpressionContext(ExpressionContext context) { CopyFrom(context); }
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IFilterVisitor<TResult> typedVisitor = visitor as IFilterVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitExpression(this);
+			if (typedVisitor != null) return typedVisitor.VisitBinaryExpression(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+	public partial class PredicateExpressionContext : ExpressionContext {
+		public PredicateContext predicate() {
+			return GetRuleContext<PredicateContext>(0);
+		}
+		public PredicateExpressionContext(ExpressionContext context) { CopyFrom(context); }
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IFilterVisitor<TResult> typedVisitor = visitor as IFilterVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPredicateExpression(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+	public partial class FilterTagsExpressionContext : ExpressionContext {
+		public Filter_tagsContext filter_tags() {
+			return GetRuleContext<Filter_tagsContext>(0);
+		}
+		public FilterTagsExpressionContext(ExpressionContext context) { CopyFrom(context); }
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IFilterVisitor<TResult> typedVisitor = visitor as IFilterVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFilterTagsExpression(this);
 			else return visitor.VisitChildren(this);
 		}
 	}
@@ -184,22 +227,35 @@ public partial class FilterParser : Parser {
 			switch (TokenStream.LA(1)) {
 			case WORD:
 				{
+				_localctx = new PredicateExpressionContext(_localctx);
+				Context = _localctx;
+				_prevctx = _localctx;
+
 				State = 25; predicate();
 				}
 				break;
 			case INT:
 			case UUID:
 				{
+				_localctx = new FilterIdExpressionContext(_localctx);
+				Context = _localctx;
+				_prevctx = _localctx;
 				State = 26; filter_id();
 				}
 				break;
 			case TAG:
 				{
+				_localctx = new FilterTagsExpressionContext(_localctx);
+				Context = _localctx;
+				_prevctx = _localctx;
 				State = 27; filter_tags();
 				}
 				break;
 			case T__0:
 				{
+				_localctx = new ParenthesesExpressionContext(_localctx);
+				Context = _localctx;
+				_prevctx = _localctx;
 				State = 28; Match(T__0);
 				State = 29; expression(0);
 				State = 30; Match(T__1);
@@ -219,7 +275,7 @@ public partial class FilterParser : Parser {
 					_prevctx = _localctx;
 					{
 					{
-					_localctx = new ExpressionContext(_parentctx, _parentState);
+					_localctx = new BinaryExpressionContext(new ExpressionContext(_parentctx, _parentState));
 					PushNewRecursionContext(_localctx, _startState, RULE_expression);
 					State = 34;
 					if (!(Precpred(Context, 5))) throw new FailedPredicateException(this, "Precpred(Context, 5)");

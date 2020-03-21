@@ -1,33 +1,72 @@
-﻿                return Expression.Equal(idProperty, idValue);
+﻿using System;
+using System.Linq.Expressions;
+using System.Collections;
+using TaskPrincess.FilterDsl.Antlr;
+using static TaskPrincess.FilterDsl.Antlr.FilterParser;
+
+namespace TaskPrincess.FilterDsl
+{
+    public class FilterVisitor<T> : FilterBaseVisitor<Expression>
+    {
+        private readonly ParameterExpression _parameter;
+
+        public FilterVisitor()
+        {
+            _parameter = Expression.Parameter(typeof(T));
+        }
+
+        public Expression<Func<T, bool>> Visit(QueryContext context)
+        {
+            return Expression.Lambda<Func<T, bool>>(VisitQuery(context), _parameter);
+        }
+
+        public override Expression VisitFilter_id(Filter_idContext context)
+        {
+            if (context.UUID() != null)
+            {
+                var uuidProperty = Expression.Property(_parameter, "uuid");
+                var uuidValue = Expression.Constant(Guid.Parse(context.UUID().GetText()), typeof(Guid));
+                return Expression.Equal(uuidProperty, uuidValue);
+            }
+
+            if (context.INT() != null)
+            {
+                var idProperty = Expression.Property(_parameter, "id");
+                var idValue = Expression.Constant(int.Parse(context.INT().GetText()), typeof(int));
+                return Expression.Equal(idProperty, idValue);
             }
 
             throw new Exception();
         }
 
-        public override Expression VisitExpression(ExpressionContext context)
+        public override Expression VisitBinaryExpression(BinaryExpressionContext context)
         {
-            if (context.binary_operator() != null)
-            {
-                var binaryOperator = context.binary_operator();
-                var left = VisitExpression(context.expression(0));
-                var right = VisitExpression(context.expression(1));
+            var binaryOperator = context.binary_operator();
+            var left = Visit(context.expression(0));
+            var right = Visit(context.expression(1));
 
-                if (binaryOperator.AND() != null)
-                {
-                    return Expression.And(left, right);
-                }
-                else if (binaryOperator.OR() != null)
-                {
-                    return Expression.Or(left, right);
-                }
-                else if (binaryOperator.XOR() != null)
-                {
-                    return Expression.ExclusiveOr(left, right);
-                }
+            if (binaryOperator == null || binaryOperator.AND() != null)
+            {
+                return Expression.And(left, right);
             }
 
-            return VisitChildren(context);
+            if (binaryOperator.OR() != null)
+            {
+                return Expression.Or(left, right);
+            }
+            else if (binaryOperator.XOR() != null)
+            {
+                return Expression.ExclusiveOr(left, right);
+            }
+
+            return Expression.And(left, right);
         }
+
+        public override Expression VisitParenthesesExpression(ParenthesesExpressionContext context)
+        {
+            return Visit(context.expression());
+        }
+
         public override Expression VisitPredicate(PredicateContext context)
         {
             var property = VisitProperty(context.property());
