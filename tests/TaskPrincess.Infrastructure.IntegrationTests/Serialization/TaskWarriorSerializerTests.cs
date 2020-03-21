@@ -16,8 +16,8 @@ namespace TaskPrincess.InfrastructureTest.Serilization
             var results = serializer.Deserialize(serializedTodo);
 
             Assert.Equal("Create an ice castle", results.Description);
-            Assert.Equal(DateTime.Parse("2020-03-07 12:11"), results.Created.Value, TimeSpan.FromMinutes(1));
-            Assert.Equal(DateTime.Parse("2020-03-07 12:11"), results.Modified.Value, TimeSpan.FromMinutes(1));
+            Assert.Equal(DateTime.Parse("2020-03-07 01:11Z"), results.Created.Value, TimeSpan.FromMinutes(1));
+            Assert.Equal(DateTime.Parse("2020-03-07 01:11Z"), results.Modified.Value, TimeSpan.FromMinutes(1));
             Assert.Equal("pending", results.Status);
             Assert.Equal(Guid.Parse("c8195128-b0ad-4ea1-bfe3-b9f78884caa9"), results.Id);
         }
@@ -31,8 +31,8 @@ namespace TaskPrincess.InfrastructureTest.Serilization
             var results = serializer.Deserialize(serializedTodo);
 
             Assert.Equal("Meet Olaf", results.Description);
-            Assert.Equal(DateTime.Parse("2020-03-07 12:42"), results.Created.Value, TimeSpan.FromMinutes(1));
-            Assert.Equal(DateTime.Parse("2020-03-07 12:42"), results.Modified.Value, TimeSpan.FromMinutes(1));
+            Assert.Equal(DateTime.Parse("2020-03-07 01:42Z"), results.Created.Value, TimeSpan.FromMinutes(1));
+            Assert.Equal(DateTime.Parse("2020-03-07 01:42Z"), results.Modified.Value, TimeSpan.FromMinutes(1));
             Assert.Equal("pending", results.Status);
             Assert.Equal(Guid.Parse("350c9222-32c3-48b9-b4c9-2ad3c0c9c7d3"), results.Id);
             Assert.Equal("make friends", results.Project);
@@ -47,8 +47,8 @@ namespace TaskPrincess.InfrastructureTest.Serilization
             var results = serializer.Deserialize(serializedTodo);
 
             Assert.Equal("Adventure back to Arendelle", results.Description);
-            Assert.Equal(DateTime.Parse("2020-03-07 12:59"), results.Created.Value, TimeSpan.FromMinutes(1));
-            Assert.Equal(DateTime.Parse("2020-03-07 12:59"), results.Modified.Value, TimeSpan.FromMinutes(1));
+            Assert.Equal(DateTime.Parse("2020-03-07 01:59Z"), results.Created.Value, TimeSpan.FromMinutes(1));
+            Assert.Equal(DateTime.Parse("2020-03-07 01:59Z"), results.Modified.Value, TimeSpan.FromMinutes(1));
             Assert.Equal("pending", results.Status);
             Assert.Equal(Guid.Parse("582f7f46-1a6c-4959-b442-5a80d72d8af3"), results.Id);
             Assert.Equal("save arendelle", results.Project);
@@ -64,11 +64,11 @@ namespace TaskPrincess.InfrastructureTest.Serilization
             var results = serializer.Deserialize(serializedTodo);
 
             Assert.Equal("Buy Anna a 200th Birthday Present", results.Description);
-            Assert.Equal(DateTime.Parse("2020-03-07 13:47"), results.Created.Value, TimeSpan.FromMinutes(1));
-            Assert.Equal(DateTime.Parse("2020-03-07 13:47"), results.Modified.Value, TimeSpan.FromMinutes(1));
+            Assert.Equal(DateTime.Parse("2020-03-07 02:47Z"), results.Created.Value, TimeSpan.FromMinutes(1));
+            Assert.Equal(DateTime.Parse("2020-03-07 02:47Z"), results.Modified.Value, TimeSpan.FromMinutes(1));
             Assert.Equal("pending", results.Status);
             Assert.Equal(Guid.Parse("aceb10c3-e746-4159-9c76-23c7aa9a6781"), results.Id);
-            Assert.Equal(DateTime.Parse("2021-06-21 00:00"), results.Due.Value, TimeSpan.FromMinutes(1));
+            Assert.Equal(DateTime.Parse("2021-06-20 14:00Z"), results.Due.Value, TimeSpan.FromMinutes(1));
         }
 
         [Fact]
@@ -80,8 +80,8 @@ namespace TaskPrincess.InfrastructureTest.Serilization
             var results = serializer.Deserialize(serializedTodo);
 
             Assert.Equal("Save the melting Olaf", results.Description);
-            Assert.Equal(DateTime.Parse("2020-03-07 13:58"), results.Created.Value, TimeSpan.FromMinutes(1));
-            Assert.Equal(DateTime.Parse("2020-03-07 13:58"), results.Modified.Value, TimeSpan.FromMinutes(1));
+            Assert.Equal(DateTime.Parse("2020-03-07 02:58Z"), results.Created.Value, TimeSpan.FromMinutes(1));
+            Assert.Equal(DateTime.Parse("2020-03-07 02:58Z"), results.Modified.Value, TimeSpan.FromMinutes(1));
             Assert.Equal("pending", results.Status);
             Assert.Equal(Guid.Parse("a95f8e13-959d-445d-ba53-e83edbf2061d"), results.Id);
             Assert.Equal("H", results.Priority);
@@ -90,6 +90,7 @@ namespace TaskPrincess.InfrastructureTest.Serilization
         [Fact]
         public void TestDeserialize_FileInWrongFormat()
         {
+            //TODO:
             var serializedTodo = "\"description\":\"Meet Olaf\",\"entry\":\"20200307T014255Z\",\"modified\":\"20200307T014255Z\",\"project\":\"make friends\",\"status\":\"pending\",\"uuid\":\"350c9222-32c3-48b9-b4c9-2ad3c0c9c7d3\"";
 
             var serializer = new TaskWarriorSerializer();
