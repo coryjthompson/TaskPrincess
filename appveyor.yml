@@ -1,0 +1,12 @@
+---
+version: 0.0.{build}
+image:
+  - Visual Studio 2019
+  - Ubuntu1804
+  - macos
+before_build:
+  - dotnet restore
+build_script:
+  - dotnet build
+test_script:
+  - dotnet test
