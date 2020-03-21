@@ -6,7 +6,7 @@ using TaskPrincess.FilterDsl.Antlr;
 
 namespace TaskPrincess.FilterDslTest
 {
-    public class FilterLexerTests
+    public class FilterVisitorTests
     {
         private readonly MockItem _adventureProject = new MockItem() { Uuid = Guid.Parse("7688bae9-4e72-4630-a553-a3b0d9ffb3bb"), Id = 5, Project = "adventure" };
         private readonly MockItem _castleProject = new MockItem() { Uuid = Guid.Parse("e7be5c17-4f4e-45f4-af4b-bd87a9ad9d87"), Id = 10, Project = "castle" };
