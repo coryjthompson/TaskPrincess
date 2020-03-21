@@ -145,6 +145,13 @@ public interface IFilterVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitUuidValue([NotNull] FilterParser.UuidValueContext context);
 	/// <summary>
+	/// Visit a parse tree produced by the <c>DateValue</c>
+	/// labeled alternative in <see cref="FilterParser.value"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitDateValue([NotNull] FilterParser.DateValueContext context);
+	/// <summary>
 	/// Visit a parse tree produced by the <c>StringValue</c>
 	/// labeled alternative in <see cref="FilterParser.value"/>.
 	/// </summary>
@@ -157,6 +164,36 @@ public interface IFilterVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitProperty_modifier([NotNull] FilterParser.Property_modifierContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="FilterParser.date"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitDate([NotNull] FilterParser.DateContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="FilterParser.date_day"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitDate_day([NotNull] FilterParser.Date_dayContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="FilterParser.date_week"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitDate_week([NotNull] FilterParser.Date_weekContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="FilterParser.date_month"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitDate_month([NotNull] FilterParser.Date_monthContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="FilterParser.date_calc"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitDate_calc([NotNull] FilterParser.Date_calcContext context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="FilterParser.property"/>.
 	/// </summary>

@@ -41,14 +41,24 @@ public partial class FilterParser : Parser {
 		XOR=10, COLON=11, NOT=12, BEFORE=13, AFTER=14, NONE=15, ANY=16, MEQUALS=17, 
 		ISNT=18, HAS=19, HASNT=20, STARTS_WITH=21, ENDS_WITH=22, MWORD=23, NO_WORD=24, 
 		LESS_THAN_OR_EQUAL_TO=25, GREATER_THAN_OR_EQUAL_TO=26, LESS_THAN=27, GREATER_THAN=28, 
-		NOT_EQUAL=29, EQUALS=30, TAG=31, REGEX=32, WORD=33, WHITESPACE=34;
+		NOT_EQUAL=29, EQUALS=30, TAG=31, DAY_MONDAY=32, DAY_TUESDAY=33, DAY_WEDNESDAY=34, 
+		DAY_THURSDAY=35, DAY_FRIDAY=36, DAY_SATURDAY=37, DAY_SUNDAY=38, DAY_ORDINAL=39, 
+		WEEK_SOCW=40, WEEK_EOCW=41, WEEK_SOW=42, WEEK_EOW=43, WEEK_SOWW=44, WEEK_EOWW=45, 
+		WEEK_SOD=46, WEEK_EOD=47, WEEK_YESTERDAY=48, WEEK_TODAY=49, WEEK_NOW=50, 
+		WEEK_TOMORROW=51, MONTH_JANUARY=52, MONTH_FEBUARY=53, MONTH_MARCH=54, 
+		MONTH_APRIL=55, MONTH_MAY=56, MONTH_JUNE=57, MONTH_JULY=58, MONTH_AUGUST=59, 
+		MONTH_SEPTEMBER=60, MONTH_OCTOBER=61, MONTH_NOVEMBER=62, MONTH_DECEMBER=63, 
+		DATE_CALC_LATER=64, REGEX=65, WORD=66, WHITESPACE=67;
 	public const int
 		RULE_query = 0, RULE_expression = 1, RULE_filter_id = 2, RULE_filter_tags = 3, 
 		RULE_predicate = 4, RULE_binary_operator = 5, RULE_relational_operator = 6, 
-		RULE_constant = 7, RULE_value = 8, RULE_property_modifier = 9, RULE_property = 10;
+		RULE_constant = 7, RULE_value = 8, RULE_property_modifier = 9, RULE_date = 10, 
+		RULE_date_day = 11, RULE_date_week = 12, RULE_date_month = 13, RULE_date_calc = 14, 
+		RULE_property = 15;
 	public static readonly string[] ruleNames = {
 		"query", "expression", "filter_id", "filter_tags", "predicate", "binary_operator", 
-		"relational_operator", "constant", "value", "property_modifier", "property"
+		"relational_operator", "constant", "value", "property_modifier", "date", 
+		"date_day", "date_week", "date_month", "date_calc", "property"
 	};
 
 	private static readonly string[] _LiteralNames = {
@@ -61,7 +71,14 @@ public partial class FilterParser : Parser {
 		"XOR", "COLON", "NOT", "BEFORE", "AFTER", "NONE", "ANY", "MEQUALS", "ISNT", 
 		"HAS", "HASNT", "STARTS_WITH", "ENDS_WITH", "MWORD", "NO_WORD", "LESS_THAN_OR_EQUAL_TO", 
 		"GREATER_THAN_OR_EQUAL_TO", "LESS_THAN", "GREATER_THAN", "NOT_EQUAL", 
-		"EQUALS", "TAG", "REGEX", "WORD", "WHITESPACE"
+		"EQUALS", "TAG", "DAY_MONDAY", "DAY_TUESDAY", "DAY_WEDNESDAY", "DAY_THURSDAY", 
+		"DAY_FRIDAY", "DAY_SATURDAY", "DAY_SUNDAY", "DAY_ORDINAL", "WEEK_SOCW", 
+		"WEEK_EOCW", "WEEK_SOW", "WEEK_EOW", "WEEK_SOWW", "WEEK_EOWW", "WEEK_SOD", 
+		"WEEK_EOD", "WEEK_YESTERDAY", "WEEK_TODAY", "WEEK_NOW", "WEEK_TOMORROW", 
+		"MONTH_JANUARY", "MONTH_FEBUARY", "MONTH_MARCH", "MONTH_APRIL", "MONTH_MAY", 
+		"MONTH_JUNE", "MONTH_JULY", "MONTH_AUGUST", "MONTH_SEPTEMBER", "MONTH_OCTOBER", 
+		"MONTH_NOVEMBER", "MONTH_DECEMBER", "DATE_CALC_LATER", "REGEX", "WORD", 
+		"WHITESPACE"
 	};
 	public static readonly IVocabulary DefaultVocabulary = new Vocabulary(_LiteralNames, _SymbolicNames);
 
@@ -117,7 +134,7 @@ public partial class FilterParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 22; expression(0);
+			State = 32; expression(0);
 			}
 		}
 		catch (RecognitionException re) {
@@ -222,7 +239,7 @@ public partial class FilterParser : Parser {
 			int _alt;
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 32;
+			State = 42;
 			ErrorHandler.Sync(this);
 			switch (TokenStream.LA(1)) {
 			case WORD:
@@ -231,7 +248,7 @@ public partial class FilterParser : Parser {
 				Context = _localctx;
 				_prevctx = _localctx;
 
-				State = 25; predicate();
+				State = 35; predicate();
 				}
 				break;
 			case INT:
@@ -240,7 +257,7 @@ public partial class FilterParser : Parser {
 				_localctx = new FilterIdExpressionContext(_localctx);
 				Context = _localctx;
 				_prevctx = _localctx;
-				State = 26; filter_id();
+				State = 36; filter_id();
 				}
 				break;
 			case TAG:
@@ -248,7 +265,7 @@ public partial class FilterParser : Parser {
 				_localctx = new FilterTagsExpressionContext(_localctx);
 				Context = _localctx;
 				_prevctx = _localctx;
-				State = 27; filter_tags();
+				State = 37; filter_tags();
 				}
 				break;
 			case T__0:
@@ -256,16 +273,16 @@ public partial class FilterParser : Parser {
 				_localctx = new ParenthesesExpressionContext(_localctx);
 				Context = _localctx;
 				_prevctx = _localctx;
-				State = 28; Match(T__0);
-				State = 29; expression(0);
-				State = 30; Match(T__1);
+				State = 38; Match(T__0);
+				State = 39; expression(0);
+				State = 40; Match(T__1);
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
 			Context.Stop = TokenStream.LT(-1);
-			State = 41;
+			State = 51;
 			ErrorHandler.Sync(this);
 			_alt = Interpreter.AdaptivePredict(TokenStream,2,Context);
 			while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.INVALID_ALT_NUMBER ) {
@@ -277,22 +294,22 @@ public partial class FilterParser : Parser {
 					{
 					_localctx = new BinaryExpressionContext(new ExpressionContext(_parentctx, _parentState));
 					PushNewRecursionContext(_localctx, _startState, RULE_expression);
-					State = 34;
+					State = 44;
 					if (!(Precpred(Context, 5))) throw new FailedPredicateException(this, "Precpred(Context, 5)");
-					State = 36;
+					State = 46;
 					ErrorHandler.Sync(this);
 					_la = TokenStream.LA(1);
 					if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << AND) | (1L << OR) | (1L << XOR))) != 0)) {
 						{
-						State = 35; binary_operator();
+						State = 45; binary_operator();
 						}
 					}
 
-					State = 38; expression(6);
+					State = 48; expression(6);
 					}
 					} 
 				}
-				State = 43;
+				State = 53;
 				ErrorHandler.Sync(this);
 				_alt = Interpreter.AdaptivePredict(TokenStream,2,Context);
 			}
@@ -332,7 +349,7 @@ public partial class FilterParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 44;
+			State = 54;
 			_la = TokenStream.LA(1);
 			if ( !(_la==INT || _la==UUID) ) {
 			ErrorHandler.RecoverInline(this);
@@ -375,7 +392,7 @@ public partial class FilterParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 46; Match(TAG);
+			State = 56; Match(TAG);
 			}
 		}
 		catch (RecognitionException re) {
@@ -422,30 +439,30 @@ public partial class FilterParser : Parser {
 		EnterRule(_localctx, 8, RULE_predicate);
 		int _la;
 		try {
-			State = 61;
+			State = 71;
 			ErrorHandler.Sync(this);
 			switch ( Interpreter.AdaptivePredict(TokenStream,5,Context) ) {
 			case 1:
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 48; property();
-				State = 51;
+				State = 58; property();
+				State = 61;
 				ErrorHandler.Sync(this);
 				_la = TokenStream.LA(1);
 				if (_la==DOT) {
 					{
-					State = 49; Match(DOT);
-					State = 50; property_modifier();
+					State = 59; Match(DOT);
+					State = 60; property_modifier();
 					}
 				}
 
-				State = 53; Match(COLON);
-				State = 55;
+				State = 63; Match(COLON);
+				State = 65;
 				ErrorHandler.Sync(this);
 				switch ( Interpreter.AdaptivePredict(TokenStream,4,Context) ) {
 				case 1:
 					{
-					State = 54; constant();
+					State = 64; constant();
 					}
 					break;
 				}
@@ -454,9 +471,9 @@ public partial class FilterParser : Parser {
 			case 2:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 57; property();
-				State = 58; relational_operator();
-				State = 59; constant();
+				State = 67; property();
+				State = 68; relational_operator();
+				State = 69; constant();
 				}
 				break;
 			}
@@ -496,7 +513,7 @@ public partial class FilterParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 63;
+			State = 73;
 			_la = TokenStream.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << AND) | (1L << OR) | (1L << XOR))) != 0)) ) {
 			ErrorHandler.RecoverInline(this);
@@ -545,7 +562,7 @@ public partial class FilterParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 65;
+			State = 75;
 			_la = TokenStream.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << LESS_THAN_OR_EQUAL_TO) | (1L << GREATER_THAN_OR_EQUAL_TO) | (1L << LESS_THAN) | (1L << GREATER_THAN) | (1L << NOT_EQUAL) | (1L << EQUALS))) != 0)) ) {
 			ErrorHandler.RecoverInline(this);
@@ -590,7 +607,7 @@ public partial class FilterParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 67; value();
+			State = 77; value();
 			}
 		}
 		catch (RecognitionException re) {
@@ -622,6 +639,17 @@ public partial class FilterParser : Parser {
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IFilterVisitor<TResult> typedVisitor = visitor as IFilterVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitDoubleValue(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+	public partial class DateValueContext : ValueContext {
+		public DateContext date() {
+			return GetRuleContext<DateContext>(0);
+		}
+		public DateValueContext(ValueContext context) { CopyFrom(context); }
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IFilterVisitor<TResult> typedVisitor = visitor as IFilterVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDateValue(this);
 			else return visitor.VisitChildren(this);
 		}
 	}
@@ -676,49 +704,88 @@ public partial class FilterParser : Parser {
 		ValueContext _localctx = new ValueContext(Context, State);
 		EnterRule(_localctx, 16, RULE_value);
 		try {
-			State = 75;
+			State = 86;
 			ErrorHandler.Sync(this);
 			switch (TokenStream.LA(1)) {
 			case INT:
 				_localctx = new IntegerValueContext(_localctx);
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 69; Match(INT);
+				State = 79; Match(INT);
 				}
 				break;
 			case DOUBLE:
 				_localctx = new DoubleValueContext(_localctx);
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 70; Match(DOUBLE);
+				State = 80; Match(DOUBLE);
 				}
 				break;
 			case STRING:
 				_localctx = new LiteralStringValueContext(_localctx);
 				EnterOuterAlt(_localctx, 3);
 				{
-				State = 71; Match(STRING);
+				State = 81; Match(STRING);
 				}
 				break;
 			case REGEX:
 				_localctx = new RegexValueContext(_localctx);
 				EnterOuterAlt(_localctx, 4);
 				{
-				State = 72; Match(REGEX);
+				State = 82; Match(REGEX);
 				}
 				break;
 			case UUID:
 				_localctx = new UuidValueContext(_localctx);
 				EnterOuterAlt(_localctx, 5);
 				{
-				State = 73; Match(UUID);
+				State = 83; Match(UUID);
+				}
+				break;
+			case DAY_MONDAY:
+			case DAY_TUESDAY:
+			case DAY_WEDNESDAY:
+			case DAY_THURSDAY:
+			case DAY_FRIDAY:
+			case DAY_SATURDAY:
+			case DAY_SUNDAY:
+			case DAY_ORDINAL:
+			case WEEK_SOCW:
+			case WEEK_EOCW:
+			case WEEK_SOW:
+			case WEEK_EOW:
+			case WEEK_SOWW:
+			case WEEK_EOWW:
+			case WEEK_SOD:
+			case WEEK_EOD:
+			case WEEK_YESTERDAY:
+			case WEEK_TODAY:
+			case WEEK_NOW:
+			case WEEK_TOMORROW:
+			case MONTH_JANUARY:
+			case MONTH_FEBUARY:
+			case MONTH_MARCH:
+			case MONTH_APRIL:
+			case MONTH_MAY:
+			case MONTH_JUNE:
+			case MONTH_JULY:
+			case MONTH_AUGUST:
+			case MONTH_SEPTEMBER:
+			case MONTH_OCTOBER:
+			case MONTH_NOVEMBER:
+			case MONTH_DECEMBER:
+			case DATE_CALC_LATER:
+				_localctx = new DateValueContext(_localctx);
+				EnterOuterAlt(_localctx, 6);
+				{
+				State = 84; date();
 				}
 				break;
 			case WORD:
 				_localctx = new StringValueContext(_localctx);
-				EnterOuterAlt(_localctx, 6);
+				EnterOuterAlt(_localctx, 7);
 				{
-				State = 74; Match(WORD);
+				State = 85; Match(WORD);
 				}
 				break;
 			default:
@@ -770,7 +837,7 @@ public partial class FilterParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 77;
+			State = 88;
 			_la = TokenStream.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << NOT) | (1L << BEFORE) | (1L << AFTER) | (1L << NONE) | (1L << ANY) | (1L << MEQUALS) | (1L << ISNT) | (1L << HAS) | (1L << HASNT) | (1L << STARTS_WITH) | (1L << ENDS_WITH) | (1L << MWORD) | (1L << NO_WORD))) != 0)) ) {
 			ErrorHandler.RecoverInline(this);
@@ -779,6 +846,303 @@ public partial class FilterParser : Parser {
 				ErrorHandler.ReportMatch(this);
 			    Consume();
 			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			ErrorHandler.ReportError(this, re);
+			ErrorHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class DateContext : ParserRuleContext {
+		public Date_dayContext date_day() {
+			return GetRuleContext<Date_dayContext>(0);
+		}
+		public Date_weekContext date_week() {
+			return GetRuleContext<Date_weekContext>(0);
+		}
+		public Date_monthContext date_month() {
+			return GetRuleContext<Date_monthContext>(0);
+		}
+		public Date_calcContext date_calc() {
+			return GetRuleContext<Date_calcContext>(0);
+		}
+		public DateContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_date; } }
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IFilterVisitor<TResult> typedVisitor = visitor as IFilterVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDate(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public DateContext date() {
+		DateContext _localctx = new DateContext(Context, State);
+		EnterRule(_localctx, 20, RULE_date);
+		try {
+			State = 94;
+			ErrorHandler.Sync(this);
+			switch (TokenStream.LA(1)) {
+			case DAY_MONDAY:
+			case DAY_TUESDAY:
+			case DAY_WEDNESDAY:
+			case DAY_THURSDAY:
+			case DAY_FRIDAY:
+			case DAY_SATURDAY:
+			case DAY_SUNDAY:
+			case DAY_ORDINAL:
+				EnterOuterAlt(_localctx, 1);
+				{
+				State = 90; date_day();
+				}
+				break;
+			case WEEK_SOCW:
+			case WEEK_EOCW:
+			case WEEK_SOW:
+			case WEEK_EOW:
+			case WEEK_SOWW:
+			case WEEK_EOWW:
+			case WEEK_SOD:
+			case WEEK_EOD:
+			case WEEK_YESTERDAY:
+			case WEEK_TODAY:
+			case WEEK_NOW:
+			case WEEK_TOMORROW:
+				EnterOuterAlt(_localctx, 2);
+				{
+				State = 91; date_week();
+				}
+				break;
+			case MONTH_JANUARY:
+			case MONTH_FEBUARY:
+			case MONTH_MARCH:
+			case MONTH_APRIL:
+			case MONTH_MAY:
+			case MONTH_JUNE:
+			case MONTH_JULY:
+			case MONTH_AUGUST:
+			case MONTH_SEPTEMBER:
+			case MONTH_OCTOBER:
+			case MONTH_NOVEMBER:
+			case MONTH_DECEMBER:
+				EnterOuterAlt(_localctx, 3);
+				{
+				State = 92; date_month();
+				}
+				break;
+			case DATE_CALC_LATER:
+				EnterOuterAlt(_localctx, 4);
+				{
+				State = 93; date_calc();
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			ErrorHandler.ReportError(this, re);
+			ErrorHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class Date_dayContext : ParserRuleContext {
+		public ITerminalNode DAY_MONDAY() { return GetToken(FilterParser.DAY_MONDAY, 0); }
+		public ITerminalNode DAY_TUESDAY() { return GetToken(FilterParser.DAY_TUESDAY, 0); }
+		public ITerminalNode DAY_WEDNESDAY() { return GetToken(FilterParser.DAY_WEDNESDAY, 0); }
+		public ITerminalNode DAY_THURSDAY() { return GetToken(FilterParser.DAY_THURSDAY, 0); }
+		public ITerminalNode DAY_FRIDAY() { return GetToken(FilterParser.DAY_FRIDAY, 0); }
+		public ITerminalNode DAY_SATURDAY() { return GetToken(FilterParser.DAY_SATURDAY, 0); }
+		public ITerminalNode DAY_SUNDAY() { return GetToken(FilterParser.DAY_SUNDAY, 0); }
+		public ITerminalNode DAY_ORDINAL() { return GetToken(FilterParser.DAY_ORDINAL, 0); }
+		public Date_dayContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_date_day; } }
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IFilterVisitor<TResult> typedVisitor = visitor as IFilterVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDate_day(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public Date_dayContext date_day() {
+		Date_dayContext _localctx = new Date_dayContext(Context, State);
+		EnterRule(_localctx, 22, RULE_date_day);
+		int _la;
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 96;
+			_la = TokenStream.LA(1);
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << DAY_MONDAY) | (1L << DAY_TUESDAY) | (1L << DAY_WEDNESDAY) | (1L << DAY_THURSDAY) | (1L << DAY_FRIDAY) | (1L << DAY_SATURDAY) | (1L << DAY_SUNDAY) | (1L << DAY_ORDINAL))) != 0)) ) {
+			ErrorHandler.RecoverInline(this);
+			}
+			else {
+				ErrorHandler.ReportMatch(this);
+			    Consume();
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			ErrorHandler.ReportError(this, re);
+			ErrorHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class Date_weekContext : ParserRuleContext {
+		public ITerminalNode WEEK_SOCW() { return GetToken(FilterParser.WEEK_SOCW, 0); }
+		public ITerminalNode WEEK_EOCW() { return GetToken(FilterParser.WEEK_EOCW, 0); }
+		public ITerminalNode WEEK_SOW() { return GetToken(FilterParser.WEEK_SOW, 0); }
+		public ITerminalNode WEEK_EOW() { return GetToken(FilterParser.WEEK_EOW, 0); }
+		public ITerminalNode WEEK_SOWW() { return GetToken(FilterParser.WEEK_SOWW, 0); }
+		public ITerminalNode WEEK_EOWW() { return GetToken(FilterParser.WEEK_EOWW, 0); }
+		public ITerminalNode WEEK_SOD() { return GetToken(FilterParser.WEEK_SOD, 0); }
+		public ITerminalNode WEEK_EOD() { return GetToken(FilterParser.WEEK_EOD, 0); }
+		public ITerminalNode WEEK_YESTERDAY() { return GetToken(FilterParser.WEEK_YESTERDAY, 0); }
+		public ITerminalNode WEEK_TODAY() { return GetToken(FilterParser.WEEK_TODAY, 0); }
+		public ITerminalNode WEEK_NOW() { return GetToken(FilterParser.WEEK_NOW, 0); }
+		public ITerminalNode WEEK_TOMORROW() { return GetToken(FilterParser.WEEK_TOMORROW, 0); }
+		public Date_weekContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_date_week; } }
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IFilterVisitor<TResult> typedVisitor = visitor as IFilterVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDate_week(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public Date_weekContext date_week() {
+		Date_weekContext _localctx = new Date_weekContext(Context, State);
+		EnterRule(_localctx, 24, RULE_date_week);
+		int _la;
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 98;
+			_la = TokenStream.LA(1);
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << WEEK_SOCW) | (1L << WEEK_EOCW) | (1L << WEEK_SOW) | (1L << WEEK_EOW) | (1L << WEEK_SOWW) | (1L << WEEK_EOWW) | (1L << WEEK_SOD) | (1L << WEEK_EOD) | (1L << WEEK_YESTERDAY) | (1L << WEEK_TODAY) | (1L << WEEK_NOW) | (1L << WEEK_TOMORROW))) != 0)) ) {
+			ErrorHandler.RecoverInline(this);
+			}
+			else {
+				ErrorHandler.ReportMatch(this);
+			    Consume();
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			ErrorHandler.ReportError(this, re);
+			ErrorHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class Date_monthContext : ParserRuleContext {
+		public ITerminalNode MONTH_JANUARY() { return GetToken(FilterParser.MONTH_JANUARY, 0); }
+		public ITerminalNode MONTH_FEBUARY() { return GetToken(FilterParser.MONTH_FEBUARY, 0); }
+		public ITerminalNode MONTH_MARCH() { return GetToken(FilterParser.MONTH_MARCH, 0); }
+		public ITerminalNode MONTH_APRIL() { return GetToken(FilterParser.MONTH_APRIL, 0); }
+		public ITerminalNode MONTH_MAY() { return GetToken(FilterParser.MONTH_MAY, 0); }
+		public ITerminalNode MONTH_JUNE() { return GetToken(FilterParser.MONTH_JUNE, 0); }
+		public ITerminalNode MONTH_JULY() { return GetToken(FilterParser.MONTH_JULY, 0); }
+		public ITerminalNode MONTH_AUGUST() { return GetToken(FilterParser.MONTH_AUGUST, 0); }
+		public ITerminalNode MONTH_SEPTEMBER() { return GetToken(FilterParser.MONTH_SEPTEMBER, 0); }
+		public ITerminalNode MONTH_OCTOBER() { return GetToken(FilterParser.MONTH_OCTOBER, 0); }
+		public ITerminalNode MONTH_NOVEMBER() { return GetToken(FilterParser.MONTH_NOVEMBER, 0); }
+		public ITerminalNode MONTH_DECEMBER() { return GetToken(FilterParser.MONTH_DECEMBER, 0); }
+		public Date_monthContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_date_month; } }
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IFilterVisitor<TResult> typedVisitor = visitor as IFilterVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDate_month(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public Date_monthContext date_month() {
+		Date_monthContext _localctx = new Date_monthContext(Context, State);
+		EnterRule(_localctx, 26, RULE_date_month);
+		int _la;
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 100;
+			_la = TokenStream.LA(1);
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << MONTH_JANUARY) | (1L << MONTH_FEBUARY) | (1L << MONTH_MARCH) | (1L << MONTH_APRIL) | (1L << MONTH_MAY) | (1L << MONTH_JUNE) | (1L << MONTH_JULY) | (1L << MONTH_AUGUST) | (1L << MONTH_SEPTEMBER) | (1L << MONTH_OCTOBER) | (1L << MONTH_NOVEMBER) | (1L << MONTH_DECEMBER))) != 0)) ) {
+			ErrorHandler.RecoverInline(this);
+			}
+			else {
+				ErrorHandler.ReportMatch(this);
+			    Consume();
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			ErrorHandler.ReportError(this, re);
+			ErrorHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class Date_calcContext : ParserRuleContext {
+		public ITerminalNode DATE_CALC_LATER() { return GetToken(FilterParser.DATE_CALC_LATER, 0); }
+		public Date_calcContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_date_calc; } }
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IFilterVisitor<TResult> typedVisitor = visitor as IFilterVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDate_calc(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public Date_calcContext date_calc() {
+		Date_calcContext _localctx = new Date_calcContext(Context, State);
+		EnterRule(_localctx, 28, RULE_date_calc);
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 102; Match(DATE_CALC_LATER);
 			}
 		}
 		catch (RecognitionException re) {
@@ -809,11 +1173,11 @@ public partial class FilterParser : Parser {
 	[RuleVersion(0)]
 	public PropertyContext property() {
 		PropertyContext _localctx = new PropertyContext(Context, State);
-		EnterRule(_localctx, 20, RULE_property);
+		EnterRule(_localctx, 30, RULE_property);
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 79; Match(WORD);
+			State = 104; Match(WORD);
 			}
 		}
 		catch (RecognitionException re) {
@@ -842,72 +1206,92 @@ public partial class FilterParser : Parser {
 
 	private static char[] _serializedATN = {
 		'\x3', '\x608B', '\xA72A', '\x8133', '\xB9ED', '\x417C', '\x3BE7', '\x7786', 
-		'\x5964', '\x3', '$', 'T', '\x4', '\x2', '\t', '\x2', '\x4', '\x3', '\t', 
-		'\x3', '\x4', '\x4', '\t', '\x4', '\x4', '\x5', '\t', '\x5', '\x4', '\x6', 
-		'\t', '\x6', '\x4', '\a', '\t', '\a', '\x4', '\b', '\t', '\b', '\x4', 
-		'\t', '\t', '\t', '\x4', '\n', '\t', '\n', '\x4', '\v', '\t', '\v', '\x4', 
-		'\f', '\t', '\f', '\x3', '\x2', '\x3', '\x2', '\x3', '\x3', '\x3', '\x3', 
+		'\x5964', '\x3', '\x45', 'm', '\x4', '\x2', '\t', '\x2', '\x4', '\x3', 
+		'\t', '\x3', '\x4', '\x4', '\t', '\x4', '\x4', '\x5', '\t', '\x5', '\x4', 
+		'\x6', '\t', '\x6', '\x4', '\a', '\t', '\a', '\x4', '\b', '\t', '\b', 
+		'\x4', '\t', '\t', '\t', '\x4', '\n', '\t', '\n', '\x4', '\v', '\t', '\v', 
+		'\x4', '\f', '\t', '\f', '\x4', '\r', '\t', '\r', '\x4', '\xE', '\t', 
+		'\xE', '\x4', '\xF', '\t', '\xF', '\x4', '\x10', '\t', '\x10', '\x4', 
+		'\x11', '\t', '\x11', '\x3', '\x2', '\x3', '\x2', '\x3', '\x3', '\x3', 
 		'\x3', '\x3', '\x3', '\x3', '\x3', '\x3', '\x3', '\x3', '\x3', '\x3', 
-		'\x3', '\x3', '\x5', '\x3', '#', '\n', '\x3', '\x3', '\x3', '\x3', '\x3', 
-		'\x5', '\x3', '\'', '\n', '\x3', '\x3', '\x3', '\a', '\x3', '*', '\n', 
-		'\x3', '\f', '\x3', '\xE', '\x3', '-', '\v', '\x3', '\x3', '\x4', '\x3', 
-		'\x4', '\x3', '\x5', '\x3', '\x5', '\x3', '\x6', '\x3', '\x6', '\x3', 
-		'\x6', '\x5', '\x6', '\x36', '\n', '\x6', '\x3', '\x6', '\x3', '\x6', 
-		'\x5', '\x6', ':', '\n', '\x6', '\x3', '\x6', '\x3', '\x6', '\x3', '\x6', 
-		'\x3', '\x6', '\x5', '\x6', '@', '\n', '\x6', '\x3', '\a', '\x3', '\a', 
-		'\x3', '\b', '\x3', '\b', '\x3', '\t', '\x3', '\t', '\x3', '\n', '\x3', 
-		'\n', '\x3', '\n', '\x3', '\n', '\x3', '\n', '\x3', '\n', '\x5', '\n', 
-		'N', '\n', '\n', '\x3', '\v', '\x3', '\v', '\x3', '\f', '\x3', '\f', '\x3', 
-		'\f', '\x2', '\x3', '\x4', '\r', '\x2', '\x4', '\x6', '\b', '\n', '\f', 
-		'\xE', '\x10', '\x12', '\x14', '\x16', '\x2', '\x6', '\x4', '\x2', '\a', 
-		'\a', '\t', '\t', '\x3', '\x2', '\n', '\f', '\x3', '\x2', '\x1B', ' ', 
-		'\x3', '\x2', '\xE', '\x1A', '\x2', 'U', '\x2', '\x18', '\x3', '\x2', 
-		'\x2', '\x2', '\x4', '\"', '\x3', '\x2', '\x2', '\x2', '\x6', '.', '\x3', 
-		'\x2', '\x2', '\x2', '\b', '\x30', '\x3', '\x2', '\x2', '\x2', '\n', '?', 
-		'\x3', '\x2', '\x2', '\x2', '\f', '\x41', '\x3', '\x2', '\x2', '\x2', 
-		'\xE', '\x43', '\x3', '\x2', '\x2', '\x2', '\x10', '\x45', '\x3', '\x2', 
-		'\x2', '\x2', '\x12', 'M', '\x3', '\x2', '\x2', '\x2', '\x14', 'O', '\x3', 
-		'\x2', '\x2', '\x2', '\x16', 'Q', '\x3', '\x2', '\x2', '\x2', '\x18', 
-		'\x19', '\x5', '\x4', '\x3', '\x2', '\x19', '\x3', '\x3', '\x2', '\x2', 
-		'\x2', '\x1A', '\x1B', '\b', '\x3', '\x1', '\x2', '\x1B', '#', '\x5', 
-		'\n', '\x6', '\x2', '\x1C', '#', '\x5', '\x6', '\x4', '\x2', '\x1D', '#', 
-		'\x5', '\b', '\x5', '\x2', '\x1E', '\x1F', '\a', '\x3', '\x2', '\x2', 
-		'\x1F', ' ', '\x5', '\x4', '\x3', '\x2', ' ', '!', '\a', '\x4', '\x2', 
-		'\x2', '!', '#', '\x3', '\x2', '\x2', '\x2', '\"', '\x1A', '\x3', '\x2', 
-		'\x2', '\x2', '\"', '\x1C', '\x3', '\x2', '\x2', '\x2', '\"', '\x1D', 
-		'\x3', '\x2', '\x2', '\x2', '\"', '\x1E', '\x3', '\x2', '\x2', '\x2', 
-		'#', '+', '\x3', '\x2', '\x2', '\x2', '$', '&', '\f', '\a', '\x2', '\x2', 
-		'%', '\'', '\x5', '\f', '\a', '\x2', '&', '%', '\x3', '\x2', '\x2', '\x2', 
-		'&', '\'', '\x3', '\x2', '\x2', '\x2', '\'', '(', '\x3', '\x2', '\x2', 
-		'\x2', '(', '*', '\x5', '\x4', '\x3', '\b', ')', '$', '\x3', '\x2', '\x2', 
-		'\x2', '*', '-', '\x3', '\x2', '\x2', '\x2', '+', ')', '\x3', '\x2', '\x2', 
-		'\x2', '+', ',', '\x3', '\x2', '\x2', '\x2', ',', '\x5', '\x3', '\x2', 
-		'\x2', '\x2', '-', '+', '\x3', '\x2', '\x2', '\x2', '.', '/', '\t', '\x2', 
-		'\x2', '\x2', '/', '\a', '\x3', '\x2', '\x2', '\x2', '\x30', '\x31', '\a', 
-		'!', '\x2', '\x2', '\x31', '\t', '\x3', '\x2', '\x2', '\x2', '\x32', '\x35', 
-		'\x5', '\x16', '\f', '\x2', '\x33', '\x34', '\a', '\x5', '\x2', '\x2', 
-		'\x34', '\x36', '\x5', '\x14', '\v', '\x2', '\x35', '\x33', '\x3', '\x2', 
-		'\x2', '\x2', '\x35', '\x36', '\x3', '\x2', '\x2', '\x2', '\x36', '\x37', 
-		'\x3', '\x2', '\x2', '\x2', '\x37', '\x39', '\a', '\r', '\x2', '\x2', 
-		'\x38', ':', '\x5', '\x10', '\t', '\x2', '\x39', '\x38', '\x3', '\x2', 
-		'\x2', '\x2', '\x39', ':', '\x3', '\x2', '\x2', '\x2', ':', '@', '\x3', 
-		'\x2', '\x2', '\x2', ';', '<', '\x5', '\x16', '\f', '\x2', '<', '=', '\x5', 
-		'\xE', '\b', '\x2', '=', '>', '\x5', '\x10', '\t', '\x2', '>', '@', '\x3', 
-		'\x2', '\x2', '\x2', '?', '\x32', '\x3', '\x2', '\x2', '\x2', '?', ';', 
-		'\x3', '\x2', '\x2', '\x2', '@', '\v', '\x3', '\x2', '\x2', '\x2', '\x41', 
-		'\x42', '\t', '\x3', '\x2', '\x2', '\x42', '\r', '\x3', '\x2', '\x2', 
-		'\x2', '\x43', '\x44', '\t', '\x4', '\x2', '\x2', '\x44', '\xF', '\x3', 
-		'\x2', '\x2', '\x2', '\x45', '\x46', '\x5', '\x12', '\n', '\x2', '\x46', 
-		'\x11', '\x3', '\x2', '\x2', '\x2', 'G', 'N', '\a', '\a', '\x2', '\x2', 
-		'H', 'N', '\a', '\b', '\x2', '\x2', 'I', 'N', '\a', '\x6', '\x2', '\x2', 
-		'J', 'N', '\a', '\"', '\x2', '\x2', 'K', 'N', '\a', '\t', '\x2', '\x2', 
-		'L', 'N', '\a', '#', '\x2', '\x2', 'M', 'G', '\x3', '\x2', '\x2', '\x2', 
-		'M', 'H', '\x3', '\x2', '\x2', '\x2', 'M', 'I', '\x3', '\x2', '\x2', '\x2', 
-		'M', 'J', '\x3', '\x2', '\x2', '\x2', 'M', 'K', '\x3', '\x2', '\x2', '\x2', 
-		'M', 'L', '\x3', '\x2', '\x2', '\x2', 'N', '\x13', '\x3', '\x2', '\x2', 
-		'\x2', 'O', 'P', '\t', '\x5', '\x2', '\x2', 'P', '\x15', '\x3', '\x2', 
-		'\x2', '\x2', 'Q', 'R', '\a', '#', '\x2', '\x2', 'R', '\x17', '\x3', '\x2', 
-		'\x2', '\x2', '\t', '\"', '&', '+', '\x35', '\x39', '?', 'M',
+		'\x3', '\x3', '\x3', '\x5', '\x3', '-', '\n', '\x3', '\x3', '\x3', '\x3', 
+		'\x3', '\x5', '\x3', '\x31', '\n', '\x3', '\x3', '\x3', '\a', '\x3', '\x34', 
+		'\n', '\x3', '\f', '\x3', '\xE', '\x3', '\x37', '\v', '\x3', '\x3', '\x4', 
+		'\x3', '\x4', '\x3', '\x5', '\x3', '\x5', '\x3', '\x6', '\x3', '\x6', 
+		'\x3', '\x6', '\x5', '\x6', '@', '\n', '\x6', '\x3', '\x6', '\x3', '\x6', 
+		'\x5', '\x6', '\x44', '\n', '\x6', '\x3', '\x6', '\x3', '\x6', '\x3', 
+		'\x6', '\x3', '\x6', '\x5', '\x6', 'J', '\n', '\x6', '\x3', '\a', '\x3', 
+		'\a', '\x3', '\b', '\x3', '\b', '\x3', '\t', '\x3', '\t', '\x3', '\n', 
+		'\x3', '\n', '\x3', '\n', '\x3', '\n', '\x3', '\n', '\x3', '\n', '\x3', 
+		'\n', '\x5', '\n', 'Y', '\n', '\n', '\x3', '\v', '\x3', '\v', '\x3', '\f', 
+		'\x3', '\f', '\x3', '\f', '\x3', '\f', '\x5', '\f', '\x61', '\n', '\f', 
+		'\x3', '\r', '\x3', '\r', '\x3', '\xE', '\x3', '\xE', '\x3', '\xF', '\x3', 
+		'\xF', '\x3', '\x10', '\x3', '\x10', '\x3', '\x11', '\x3', '\x11', '\x3', 
+		'\x11', '\x2', '\x3', '\x4', '\x12', '\x2', '\x4', '\x6', '\b', '\n', 
+		'\f', '\xE', '\x10', '\x12', '\x14', '\x16', '\x18', '\x1A', '\x1C', '\x1E', 
+		' ', '\x2', '\t', '\x4', '\x2', '\a', '\a', '\t', '\t', '\x3', '\x2', 
+		'\n', '\f', '\x3', '\x2', '\x1B', ' ', '\x3', '\x2', '\xE', '\x1A', '\x3', 
+		'\x2', '\"', ')', '\x3', '\x2', '*', '\x35', '\x3', '\x2', '\x36', '\x41', 
+		'\x2', 'm', '\x2', '\"', '\x3', '\x2', '\x2', '\x2', '\x4', ',', '\x3', 
+		'\x2', '\x2', '\x2', '\x6', '\x38', '\x3', '\x2', '\x2', '\x2', '\b', 
+		':', '\x3', '\x2', '\x2', '\x2', '\n', 'I', '\x3', '\x2', '\x2', '\x2', 
+		'\f', 'K', '\x3', '\x2', '\x2', '\x2', '\xE', 'M', '\x3', '\x2', '\x2', 
+		'\x2', '\x10', 'O', '\x3', '\x2', '\x2', '\x2', '\x12', 'X', '\x3', '\x2', 
+		'\x2', '\x2', '\x14', 'Z', '\x3', '\x2', '\x2', '\x2', '\x16', '`', '\x3', 
+		'\x2', '\x2', '\x2', '\x18', '\x62', '\x3', '\x2', '\x2', '\x2', '\x1A', 
+		'\x64', '\x3', '\x2', '\x2', '\x2', '\x1C', '\x66', '\x3', '\x2', '\x2', 
+		'\x2', '\x1E', 'h', '\x3', '\x2', '\x2', '\x2', ' ', 'j', '\x3', '\x2', 
+		'\x2', '\x2', '\"', '#', '\x5', '\x4', '\x3', '\x2', '#', '\x3', '\x3', 
+		'\x2', '\x2', '\x2', '$', '%', '\b', '\x3', '\x1', '\x2', '%', '-', '\x5', 
+		'\n', '\x6', '\x2', '&', '-', '\x5', '\x6', '\x4', '\x2', '\'', '-', '\x5', 
+		'\b', '\x5', '\x2', '(', ')', '\a', '\x3', '\x2', '\x2', ')', '*', '\x5', 
+		'\x4', '\x3', '\x2', '*', '+', '\a', '\x4', '\x2', '\x2', '+', '-', '\x3', 
+		'\x2', '\x2', '\x2', ',', '$', '\x3', '\x2', '\x2', '\x2', ',', '&', '\x3', 
+		'\x2', '\x2', '\x2', ',', '\'', '\x3', '\x2', '\x2', '\x2', ',', '(', 
+		'\x3', '\x2', '\x2', '\x2', '-', '\x35', '\x3', '\x2', '\x2', '\x2', '.', 
+		'\x30', '\f', '\a', '\x2', '\x2', '/', '\x31', '\x5', '\f', '\a', '\x2', 
+		'\x30', '/', '\x3', '\x2', '\x2', '\x2', '\x30', '\x31', '\x3', '\x2', 
+		'\x2', '\x2', '\x31', '\x32', '\x3', '\x2', '\x2', '\x2', '\x32', '\x34', 
+		'\x5', '\x4', '\x3', '\b', '\x33', '.', '\x3', '\x2', '\x2', '\x2', '\x34', 
+		'\x37', '\x3', '\x2', '\x2', '\x2', '\x35', '\x33', '\x3', '\x2', '\x2', 
+		'\x2', '\x35', '\x36', '\x3', '\x2', '\x2', '\x2', '\x36', '\x5', '\x3', 
+		'\x2', '\x2', '\x2', '\x37', '\x35', '\x3', '\x2', '\x2', '\x2', '\x38', 
+		'\x39', '\t', '\x2', '\x2', '\x2', '\x39', '\a', '\x3', '\x2', '\x2', 
+		'\x2', ':', ';', '\a', '!', '\x2', '\x2', ';', '\t', '\x3', '\x2', '\x2', 
+		'\x2', '<', '?', '\x5', ' ', '\x11', '\x2', '=', '>', '\a', '\x5', '\x2', 
+		'\x2', '>', '@', '\x5', '\x14', '\v', '\x2', '?', '=', '\x3', '\x2', '\x2', 
+		'\x2', '?', '@', '\x3', '\x2', '\x2', '\x2', '@', '\x41', '\x3', '\x2', 
+		'\x2', '\x2', '\x41', '\x43', '\a', '\r', '\x2', '\x2', '\x42', '\x44', 
+		'\x5', '\x10', '\t', '\x2', '\x43', '\x42', '\x3', '\x2', '\x2', '\x2', 
+		'\x43', '\x44', '\x3', '\x2', '\x2', '\x2', '\x44', 'J', '\x3', '\x2', 
+		'\x2', '\x2', '\x45', '\x46', '\x5', ' ', '\x11', '\x2', '\x46', 'G', 
+		'\x5', '\xE', '\b', '\x2', 'G', 'H', '\x5', '\x10', '\t', '\x2', 'H', 
+		'J', '\x3', '\x2', '\x2', '\x2', 'I', '<', '\x3', '\x2', '\x2', '\x2', 
+		'I', '\x45', '\x3', '\x2', '\x2', '\x2', 'J', '\v', '\x3', '\x2', '\x2', 
+		'\x2', 'K', 'L', '\t', '\x3', '\x2', '\x2', 'L', '\r', '\x3', '\x2', '\x2', 
+		'\x2', 'M', 'N', '\t', '\x4', '\x2', '\x2', 'N', '\xF', '\x3', '\x2', 
+		'\x2', '\x2', 'O', 'P', '\x5', '\x12', '\n', '\x2', 'P', '\x11', '\x3', 
+		'\x2', '\x2', '\x2', 'Q', 'Y', '\a', '\a', '\x2', '\x2', 'R', 'Y', '\a', 
+		'\b', '\x2', '\x2', 'S', 'Y', '\a', '\x6', '\x2', '\x2', 'T', 'Y', '\a', 
+		'\x43', '\x2', '\x2', 'U', 'Y', '\a', '\t', '\x2', '\x2', 'V', 'Y', '\x5', 
+		'\x16', '\f', '\x2', 'W', 'Y', '\a', '\x44', '\x2', '\x2', 'X', 'Q', '\x3', 
+		'\x2', '\x2', '\x2', 'X', 'R', '\x3', '\x2', '\x2', '\x2', 'X', 'S', '\x3', 
+		'\x2', '\x2', '\x2', 'X', 'T', '\x3', '\x2', '\x2', '\x2', 'X', 'U', '\x3', 
+		'\x2', '\x2', '\x2', 'X', 'V', '\x3', '\x2', '\x2', '\x2', 'X', 'W', '\x3', 
+		'\x2', '\x2', '\x2', 'Y', '\x13', '\x3', '\x2', '\x2', '\x2', 'Z', '[', 
+		'\t', '\x5', '\x2', '\x2', '[', '\x15', '\x3', '\x2', '\x2', '\x2', '\\', 
+		'\x61', '\x5', '\x18', '\r', '\x2', ']', '\x61', '\x5', '\x1A', '\xE', 
+		'\x2', '^', '\x61', '\x5', '\x1C', '\xF', '\x2', '_', '\x61', '\x5', '\x1E', 
+		'\x10', '\x2', '`', '\\', '\x3', '\x2', '\x2', '\x2', '`', ']', '\x3', 
+		'\x2', '\x2', '\x2', '`', '^', '\x3', '\x2', '\x2', '\x2', '`', '_', '\x3', 
+		'\x2', '\x2', '\x2', '\x61', '\x17', '\x3', '\x2', '\x2', '\x2', '\x62', 
+		'\x63', '\t', '\x6', '\x2', '\x2', '\x63', '\x19', '\x3', '\x2', '\x2', 
+		'\x2', '\x64', '\x65', '\t', '\a', '\x2', '\x2', '\x65', '\x1B', '\x3', 
+		'\x2', '\x2', '\x2', '\x66', 'g', '\t', '\b', '\x2', '\x2', 'g', '\x1D', 
+		'\x3', '\x2', '\x2', '\x2', 'h', 'i', '\a', '\x42', '\x2', '\x2', 'i', 
+		'\x1F', '\x3', '\x2', '\x2', '\x2', 'j', 'k', '\a', '\x44', '\x2', '\x2', 
+		'k', '!', '\x3', '\x2', '\x2', '\x2', '\n', ',', '\x30', '\x35', '?', 
+		'\x43', 'I', 'X', '`',
 	};
 
 	public static readonly ATN _ATN =
