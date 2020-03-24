@@ -51,6 +51,10 @@ namespace TaskPrincess.FilterDsl.DateTime
                     return GetPreviousDayOfWeek(now, _weekStart);
                 case "sow":
                     return GetNextDayOfWeek(now, _weekStart);
+                case "soww":
+                    return GetNextDayOfWeek(now, DayOfWeek.Monday);
+                case "eoww":
+                    return GetNextDayOfWeek(now, DayOfWeek.Friday);
                 case "eocw":
                 case "eow":
                     return EndOfDay(GetNextDayOfWeek(now, _weekEnd));

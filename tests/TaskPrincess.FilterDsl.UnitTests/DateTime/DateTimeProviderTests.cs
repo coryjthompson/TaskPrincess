@@ -109,6 +109,14 @@ namespace TaskPrincess.FilterDslTest.DateTime
         }
 
         [Fact]
+        public void TestParse_StartOfWorkWeek()
+        {
+            var dateTime = new System.DateTime(2020, 1, 1, 3, 15, 0);
+            var results = BuildParse("soww", dateTime);
+            Assert.Equal("2020-01-06 00:00:00", results);
+        }
+
+        [Fact]
         public void TestParse_EndOfCurrentWeek()
         {
             var dateTime = new System.DateTime(2020, 1, 1, 3, 15, 0);
@@ -130,6 +138,14 @@ namespace TaskPrincess.FilterDslTest.DateTime
 
             Assert.Equal("2020-01-04 23:59:59", resultEowDowSun);
             Assert.Equal("2020-01-05 23:59:59", resultEowDowMon);
+        }
+
+        [Fact]
+        public void TestParse_EndOfWorkWeek()
+        {
+            var dateTime = new System.DateTime(2020, 1, 1, 3, 15 ,0);
+            var results = BuildParse("eoww", dateTime);
+            Assert.Equal("2020-01-03 00:00:00", results);
         }
 
         [Fact]
