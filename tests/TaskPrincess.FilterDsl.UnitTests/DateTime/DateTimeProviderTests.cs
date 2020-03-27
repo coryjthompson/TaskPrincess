@@ -6,6 +6,7 @@ namespace TaskPrincess.FilterDslTest.DateTime
 {
     public class DateTimeProviderTests
     {
+        
         [Fact]
         public void TestParse_Monday()
         {
@@ -162,6 +163,100 @@ namespace TaskPrincess.FilterDslTest.DateTime
             var dateTime = new System.DateTime(2020, 1, 1, 3, 15, 0);
             var results = BuildParse("eod", dateTime);
             Assert.Equal("2020-01-01 23:59:59", results);
+        }
+
+        [Fact]
+        public void TestParse_StartOfCurrentYear()
+        {
+            var dateTime = new System.DateTime(2020, 8, 1, 3, 15, 0);
+            var results = BuildParse("socy", dateTime);
+            Assert.Equal("2020-01-01 00:00:00", results);
+        }
+
+        [Fact]
+        public void TestParse_EndOfCurrentYear()
+        {
+            var dateTime = new System.DateTime(2020, 1, 1, 3, 15, 0);
+            var results = BuildParse("eocy", dateTime);
+            Assert.Equal("2020-12-31 23:59:59", results);
+        }
+
+        [Fact]
+        public void TestParse_StartOfMonth()
+        {
+            var dateTime = new System.DateTime(2020, 1, 1, 3, 15, 0);
+            var results = BuildParse("som", dateTime);
+            Assert.Equal("2020-02-01 00:00:00", results);
+        }
+
+        [Fact]
+        public void TestParse_EndOfMonth()
+        {
+            // Leap Year Feb
+            var leapYearFeb = new System.DateTime(2020, 2, 15, 15, 15, 0);
+            var leapYearResult = BuildParse("eom", leapYearFeb);
+            Assert.Equal("2020-02-29 23:59:59", leapYearResult);
+
+            // Non-leap Year Feb
+            var nonLeapYearFeb = new System.DateTime(2020, 2, 15, 15, 15, 0);
+            var nonLeapYearResult = BuildParse("eom", nonLeapYearFeb);
+            Assert.Equal("2020-02-29 23:59:59", nonLeapYearResult);
+        }
+
+        [Fact]
+        public void TestParse_StartOfCurrentMonth()
+        {
+            var dateTime = new System.DateTime(2020, 1, 1, 3, 15, 0);
+            var results = BuildParse("socm", dateTime);
+            Assert.Equal("2020-01-01 00:00:00", results);
+        }
+
+        [Fact]
+        public void TestParse_EndOfCurrentMonth()
+        {
+            var dateTime = new System.DateTime(2020, 1, 1, 3, 15, 0);
+            var results = BuildParse("eocm", dateTime);
+            Assert.Equal("2020-01-31 23:59:59", results);
+        }
+
+        [Fact]
+        public void TestParse_StartOfYear()
+        {
+            var dateTime = new System.DateTime(2020, 1, 1, 3, 15, 0);
+            var results = BuildParse("soy", dateTime);
+            Assert.Equal("2021-01-01 00:00:00", results);
+        }
+
+        [Fact]
+        public void TestParse_EndOfYear()
+        {
+            var dateTime = new System.DateTime(2020, 1, 1, 3, 15, 0);
+            var results = BuildParse("eoy", dateTime);
+            Assert.Equal("2020-12-31 23:59:59", results);
+        }
+
+        [Fact]
+        public void TestParse_StartOfCurrentQuarter()
+        {
+            Assert.True(false);
+        }
+
+        [Fact]
+        public void TestParse_EndOfCurrentQuarter()
+        {
+            Assert.True(false);
+        }
+
+        [Fact]
+        public void TestParse_StartOfQuarter()
+        {
+            Assert.True(false);
+        }
+
+        [Fact]
+        public void TestParse_EndOfQuarter()
+        {
+            Assert.True(false);
         }
 
         [Fact]

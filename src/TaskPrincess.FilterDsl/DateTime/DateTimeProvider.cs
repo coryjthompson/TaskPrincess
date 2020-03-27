@@ -98,6 +98,20 @@ namespace TaskPrincess.FilterDsl.DateTime
                     return StartOfDay(now);
                 case "eod":
                     return EndOfDay(now);
+                case "socy":
+                    return StartOfCurrentYear(now);
+                case "soy":
+                    return GetUpcomingMonth(now, Month.January);
+                case "eoy":
+                case "eocy":
+                    return EndOfMonth(GetUpcomingMonth(now, Month.December));
+                case "socm":
+                    return StartOfMonth(now);
+                case "som":
+                    return GetUpcomingMonth(now);
+                case "eom":
+                case "eocm":
+                    return EndOfMonth(now);
                 case "yesterday":
                     return Yesterday(now);
                 case "now":
@@ -131,6 +145,7 @@ namespace TaskPrincess.FilterDsl.DateTime
         {
             return now.Date.AddHours(23).AddMinutes(59).AddSeconds(59);
         }
+
         protected System.DateTime GetPreviousDayOfWeek(System.DateTime now, DayOfWeek day)
         {
             var diff = (7 + (now.DayOfWeek - day)) % 7;
@@ -144,19 +159,34 @@ namespace TaskPrincess.FilterDsl.DateTime
             return now.AddDays(diff).Date; //Date will ensure sod
         }
 
-        protected System.DateTime GetUpcomingMonth(System.DateTime now, Month month)
+        protected System.DateTime GetUpcomingMonth(System.DateTime now, Month? month = null)
         {
             now = StartOfMonth(now);
 
-            var diff = (12 + ((int)month - now.Month)) % 12;
-            diff = (diff == 0) ? 12 : diff;
+            var diff = 1;
+            if (month.HasValue)
+            {
+                diff = (12 + ((int)month - now.Month)) % 12;
+                diff = (diff == 0) ? 12 : diff;
+            }
 
             return now.AddMonths(diff);
         }
-        
-        protected System.DateTime StartOfMonth(System.DateTime date) 
+
+        protected System.DateTime StartOfMonth(System.DateTime date)
         {
             return new System.DateTime(date.Year, date.Month, 1);
+        }
+
+        protected System.DateTime EndOfMonth(System.DateTime date)
+        {
+            var daysInMonth = System.DateTime.DaysInMonth(date.Year, date.Month);
+            return new System.DateTime(date.Year, date.Month, daysInMonth, 23, 59, 59);
+        }
+
+        protected System.DateTime StartOfCurrentYear(System.DateTime date)
+        {
+            return new System.DateTime(date.Year, 1, 1, 0, 0, 0);
         }
     }
 }
