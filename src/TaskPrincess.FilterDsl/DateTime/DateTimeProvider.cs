@@ -26,6 +26,41 @@ namespace TaskPrincess.FilterDsl.DateTime
             var now = Now();
             switch (dateTime.ToLower())
             {
+                case "jan":
+                case "january":
+                    return GetUpcomingMonth(now, Month.January);
+                case "feb":
+                case "february":
+                    return GetUpcomingMonth(now, Month.Febuary);
+                case "mar":
+                case "march":
+                    return GetUpcomingMonth(now, Month.March);
+                case "apr":
+                case "april":
+                    return GetUpcomingMonth(now, Month.April);
+                case "may":
+                    return GetUpcomingMonth(now, Month.May);
+                case "jun":
+                case "june":
+                    return GetUpcomingMonth(now, Month.June);
+                case "jul":
+                case "july":
+                    return GetUpcomingMonth(now, Month.July);
+                case "aug":
+                case "august":
+                    return GetUpcomingMonth(now, Month.August);
+                case "sep":
+                case "september":
+                    return GetUpcomingMonth(now, Month.September);
+                case "oct":
+                case "october":
+                    return GetUpcomingMonth(now, Month.October);
+                case "nov":
+                case "november":
+                    return GetUpcomingMonth(now, Month.November);
+                case "dec":
+                case "december":
+                    return GetUpcomingMonth(now, Month.December);
                 case "mon":
                 case "monday":
                     return GetNextDayOfWeek(now, DayOfWeek.Monday);
@@ -67,6 +102,9 @@ namespace TaskPrincess.FilterDsl.DateTime
                     return Yesterday(now);
                 case "now":
                     return now;
+                case "later":
+                case "someday":
+                    return new System.DateTime(2038, 01, 18, 0, 0, 0);
                 default:
                     break;
             }
@@ -79,7 +117,7 @@ namespace TaskPrincess.FilterDsl.DateTime
             return System.DateTime.Now;
         }
 
-        protected System.DateTime Yesterday(System.DateTime now) 
+        protected System.DateTime Yesterday(System.DateTime now)
         {
             return now.AddDays(-1).Date;
         }
@@ -104,6 +142,21 @@ namespace TaskPrincess.FilterDsl.DateTime
             var diff = (7 + (day - now.DayOfWeek)) % 7;
             diff = (diff == 0) ? 7 : diff;
             return now.AddDays(diff).Date; //Date will ensure sod
+        }
+
+        protected System.DateTime GetUpcomingMonth(System.DateTime now, Month month)
+        {
+            now = StartOfMonth(now);
+
+            var diff = (12 + ((int)month - now.Month)) % 12;
+            diff = (diff == 0) ? 12 : diff;
+
+            return now.AddMonths(diff);
+        }
+        
+        protected System.DateTime StartOfMonth(System.DateTime date) 
+        {
+            return new System.DateTime(date.Year, date.Month, 1);
         }
     }
 }
