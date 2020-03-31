@@ -107,6 +107,14 @@ namespace TaskPrincess.FilterDslTest.DateParser.Behaviors
             Assert.Equal("2020-12-31 23:59:59", results);
         }
 
+        [Fact]
+        public void TestParse_UnhandledShouldReturnNull()
+        {
+            var dateTime = new DateTime(2020, 11, 1, 3, 15, 0);
+            var results = BuildParse("unhandled", dateTime);
+            Assert.Null(results);
+        }
+
         public string BuildParse(string parse, DateTime now)
         {
             var behavior = new YearDatesBehavior();

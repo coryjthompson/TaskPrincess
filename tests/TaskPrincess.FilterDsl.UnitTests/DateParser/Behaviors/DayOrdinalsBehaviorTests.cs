@@ -54,6 +54,14 @@ namespace TaskPrincess.FilterDslTest.DateParser.Behaviors
             Assert.Throws<Exception>(() => BuildParse("31", dateTime));
         }
 
+        [Fact]
+        public void TestParse_UnhandledShouldReturnNull()
+        {
+            var dateTime = new DateTime(2020, 3, 3, 3, 15, 0);
+            var results = BuildParse("unhandled", dateTime);
+            Assert.Null(results);
+        }
+
         public string BuildParse(string parse, DateTime now, DateParserConfig config = null)
         {
             var behavior = new DayOrdinalsBehavior();

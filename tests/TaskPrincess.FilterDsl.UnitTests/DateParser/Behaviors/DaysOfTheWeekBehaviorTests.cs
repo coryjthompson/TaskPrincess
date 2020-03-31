@@ -83,6 +83,14 @@ namespace TaskPrincess.FilterDslTest.DateParser.Behaviors
             Assert.Equal("2020-01-05 00:00:00", resultSunday);
         }
 
+        [Fact]
+        public void TestParse_UnhandledWillReturnNull()
+        {
+            var dateTime = new DateTime(2020, 1, 1, 3, 15, 0);
+            var results = BuildParse("unhandled", dateTime);
+            Assert.Null(results);
+        }
+
         public string BuildParse(string parse, DateTime now)
         {
             var behavior = new DaysOfTheWeekBehavior();
