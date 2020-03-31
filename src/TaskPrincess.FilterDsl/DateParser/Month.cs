@@ -1,4 +1,4 @@
-﻿namespace TaskPrincess.FilterDsl.DateTime
+﻿namespace TaskPrincess.FilterDsl.DateParser
 {
     public enum Month
     {
