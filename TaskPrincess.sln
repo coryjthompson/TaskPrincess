@@ -21,9 +21,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskPrincess.Domain.UnitTes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskPrincess.Infrastructure.IntegrationTests", "tests\TaskPrincess.Infrastructure.IntegrationTests\TaskPrincess.Infrastructure.IntegrationTests.csproj", "{21B4E13A-BC3B-490A-8ABF-58789A3A6128}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskPrincess.FilterDsl.UnitTests", "tests\TaskPrincess.FilterDsl.UnitTests\TaskPrincess.FilterDsl.UnitTests.csproj", "{82038059-EB2F-4E4D-82EF-8219786C2A5D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskPrincess.DomainLanguage.UnitTests", "tests\TaskPrincess.DomainLanguage.UnitTests\TaskPrincess.DomainLanguage.UnitTests.csproj", "{82038059-EB2F-4E4D-82EF-8219786C2A5D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskPrincess.FilterDsl", "src\TaskPrincess.FilterDsl\TaskPrincess.FilterDsl.csproj", "{E5BB0C7A-985B-4E77-8484-C53278BF7F30}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskPrincess.DomainLanguage", "src\TaskPrincess.DomainLanguage\TaskPrincess.DomainLanguage.csproj", "{E5BB0C7A-985B-4E77-8484-C53278BF7F30}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
