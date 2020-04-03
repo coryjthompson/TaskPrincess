@@ -17,7 +17,7 @@ namespace TaskPrincess.DomainLanguageTests.Parser
             var expectedDateTime = new DateTime(2019, 01, 01);
 
             var mockDateParser = new Mock<IDateParserBehavior>();
-            mockDateParser.Setup(e => e.Parse("now", expectedDateTime, null)).Returns(expectedDateTime);
+            mockDateParser.Setup(e => e.Parse("now", It.IsAny<DateTime>(), null)).Returns(expectedDateTime);
 
             var dateParser = new DateParser(new List<IDateParserBehavior>() { mockDateParser.Object }, null);
             Assert.Equal(expectedDateTime, dateParser.Parse("now"), TimeSpan.FromSeconds(1));
