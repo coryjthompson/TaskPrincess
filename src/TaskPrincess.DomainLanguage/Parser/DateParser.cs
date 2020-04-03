@@ -5,6 +5,9 @@ using TaskPrincess.DomainLanguage.Parser.Models;
 
 namespace TaskPrincess.DomainLanguage.Parser
 {
+    /// <summary>
+    /// Using the strategy pattern to enumerate registered date parser behaviors.
+    /// </summary>
     public class DateParser : IDateParser
     {
         private readonly IEnumerable<IDateParserBehavior> _behaviors;
@@ -31,7 +34,7 @@ namespace TaskPrincess.DomainLanguage.Parser
             throw new Exception($"Could not parse named date: {namedDate}");
         }
 
-        // Moved to a seperate method so that it can be mocked.
+        // Moved to a separate method so that it can be mocked.
         protected virtual DateTime Now()
         {
             return DateTime.Now;

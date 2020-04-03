@@ -7,6 +7,8 @@ using TaskPrincess.DomainLanguage.Parser.Models;
 namespace TaskPrincess.DomainLanguage.Parser.Behaviors
 {
     /// <summary>
+    /// Handles the parsing of Day ordinals (e.g. 1st, 22nd, 15)
+    /// If the Day of month has already passed, assume the next month.
     /// </summary>
     public class DayOrdinalsBehavior : IDateParserBehavior
     {

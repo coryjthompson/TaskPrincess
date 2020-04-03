@@ -6,6 +6,10 @@ using static TaskPrincess.DomainLanguage.Antlr.FilterParser;
 
 namespace TaskPrincess.DomainLanguage
 {
+    /// <summary>
+    /// Antlr visitor to convert filter text to a C# expression.
+    /// This is then used to apply filter to an enumerable of todos.
+    /// </summary>
     public class FilterVisitor<T> : FilterBaseVisitor<Expression>
     {
         private readonly ParameterExpression _parameter;
