@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TaskPrincess.DomainLanguage.DateParser
+namespace TaskPrincess.DomainLanguage.Parser.Models
 {
     public class DateParserConfig
     {

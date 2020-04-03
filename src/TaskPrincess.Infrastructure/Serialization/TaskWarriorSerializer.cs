@@ -14,6 +14,7 @@ namespace TaskPrincess.Infrastructure.Serilization
             {
                 PropertyNamingPolicy = new TaskWarriorNamingPolicy()
             };
+
             _options.Converters.Add(new Iso8601CombinedDateTimeNullableConverter());
         }
 

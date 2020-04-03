@@ -4,7 +4,7 @@ using System;
 using Antlr4.Runtime;
 using TaskPrincess.DomainLanguage.Antlr;
 
-namespace TaskPrincess.DomainLanguageTest
+namespace TaskPrincess.DomainLanguageTests
 {
     public class FilterVisitorTests
     {

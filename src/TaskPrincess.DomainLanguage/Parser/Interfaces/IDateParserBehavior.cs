@@ -1,6 +1,7 @@
 ﻿using System;
+using TaskPrincess.DomainLanguage.Parser.Models;
 
-namespace TaskPrincess.DomainLanguage.DateParser.Interfaces
+namespace TaskPrincess.DomainLanguage.Parser.Interfaces
 {
     /// <summary>
     /// Behaviors to parse a named date into a DateTime object.

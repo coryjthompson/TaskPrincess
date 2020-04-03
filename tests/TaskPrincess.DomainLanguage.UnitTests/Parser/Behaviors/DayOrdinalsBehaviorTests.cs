@@ -1,9 +1,9 @@
 ﻿using System;
-using TaskPrincess.DomainLanguage.DateParser;
-using TaskPrincess.DomainLanguage.DateParser.Behaviors;
+using TaskPrincess.DomainLanguage.Parser.Behaviors;
+using TaskPrincess.DomainLanguage.Parser.Models;
 using Xunit;
 
-namespace TaskPrincess.DomainLanguageTest.DateParser.Behaviors
+namespace TaskPrincess.DomainLanguageTests.Parser.Behaviors
 {
     public class DayOrdinalsBehaviorTests
     {

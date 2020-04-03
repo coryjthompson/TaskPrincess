@@ -1,6 +1,7 @@
 ﻿using System;
+using TaskPrincess.DomainLanguage.Parser.Models;
 
-namespace TaskPrincess.DomainLanguage.DateParser.Extensions
+namespace TaskPrincess.DomainLanguage.Parser.Extensions
 {
     public static class DateTimeExtensions
     {

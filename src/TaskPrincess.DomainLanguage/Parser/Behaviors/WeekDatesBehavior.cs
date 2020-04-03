@@ -1,8 +1,9 @@
 ﻿using System;
-using TaskPrincess.DomainLanguage.DateParser.Extensions;
-using TaskPrincess.DomainLanguage.DateParser.Interfaces;
+using TaskPrincess.DomainLanguage.Parser.Extensions;
+using TaskPrincess.DomainLanguage.Parser.Interfaces;
+using TaskPrincess.DomainLanguage.Parser.Models;
 
-namespace TaskPrincess.DomainLanguage.DateParser.Behaviors
+namespace TaskPrincess.DomainLanguage.Parser.Behaviors
 {
     /// <summary>
     /// Week named Dates are calculated bounderies of dates that occur within a week.

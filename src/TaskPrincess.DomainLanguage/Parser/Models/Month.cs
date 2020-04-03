@@ -1,4 +1,4 @@
-﻿namespace TaskPrincess.DomainLanguage.DateParser
+﻿namespace TaskPrincess.DomainLanguage.Parser.Models
 {
     public enum Month
     {

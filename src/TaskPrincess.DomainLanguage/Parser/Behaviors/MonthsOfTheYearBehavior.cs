@@ -1,8 +1,9 @@
 ﻿using System;
-using TaskPrincess.DomainLanguage.DateParser.Extensions;
-using TaskPrincess.DomainLanguage.DateParser.Interfaces;
+using TaskPrincess.DomainLanguage.Parser.Extensions;
+using TaskPrincess.DomainLanguage.Parser.Interfaces;
+using TaskPrincess.DomainLanguage.Parser.Models;
 
-namespace TaskPrincess.DomainLanguage.DateParser.Behaviors
+namespace TaskPrincess.DomainLanguage.Parser.Behaviors
 {
     /// <summary>
     /// Parses a named month of the year (e.g. "january") into the the closest future date.

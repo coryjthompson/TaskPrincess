@@ -1,8 +1,8 @@
 ﻿using System;
-using TaskPrincess.DomainLanguage.DateParser.Behaviors;
+using TaskPrincess.DomainLanguage.Parser.Behaviors;
 using Xunit;
 
-namespace TaskPrincess.DomainLanguageTest.DateParser.Behaviors
+namespace TaskPrincess.DomainLanguageTests.Parser.Behaviors
 {
     public class DaysOfTheWeekBehaviorTests
     {

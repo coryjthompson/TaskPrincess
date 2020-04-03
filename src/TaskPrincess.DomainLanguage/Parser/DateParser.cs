@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using TaskPrincess.DomainLanguage.DateParser.Interfaces;
+using TaskPrincess.DomainLanguage.Parser.Interfaces;
+using TaskPrincess.DomainLanguage.Parser.Models;
 
-namespace TaskPrincess.DomainLanguage.DateParser
+namespace TaskPrincess.DomainLanguage.Parser
 {
     public class DateParser : IDateParser
     {
