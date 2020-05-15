@@ -3,6 +3,7 @@ using System.Linq.Expressions;
 using System.Collections;
 using TaskPrincess.DomainLanguage.Antlr;
 using static TaskPrincess.DomainLanguage.Antlr.FilterParser;
+using TaskPrincess.DomainLanguage.Parser;
 
 namespace TaskPrincess.DomainLanguage
 {
@@ -13,10 +14,12 @@ namespace TaskPrincess.DomainLanguage
     public class FilterVisitor<T> : FilterBaseVisitor<Expression>
     {
         private readonly ParameterExpression _parameter;
+        private readonly IDateParser _dateParser;
 
-        public FilterVisitor()
+        public FilterVisitor(IDateParser dateParser)
         {
             _parameter = Expression.Parameter(typeof(T));
+            _dateParser = dateParser;
         }
 
         public Expression<Func<T, bool>> Visit(QueryContext context)
@@ -117,6 +120,13 @@ namespace TaskPrincess.DomainLanguage
         {
             var value = context.GetText();
             return Expression.Constant(value, typeof(string));
+        }
+
+        public override Expression VisitDate(DateContext context)
+        {
+            var value = context.GetText();
+            var date = _dateParser.Parse(value);
+            return Expression.Constant(date, typeof(DateTime));
         }
 
         /*

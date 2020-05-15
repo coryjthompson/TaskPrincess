@@ -1,15 +1,20 @@
 ﻿using Xunit;
 using TaskPrincess.DomainLanguage;
 using System;
+using System.Collections.Generic;
 using Antlr4.Runtime;
 using TaskPrincess.DomainLanguage.Antlr;
+using TaskPrincess.DomainLanguage.Parser;
+using TaskPrincess.DomainLanguage.Parser.Models;
+using TaskPrincess.DomainLanguage.Parser.Behaviors;
+using TaskPrincess.DomainLanguage.Parser.Interfaces;
 
 namespace TaskPrincess.DomainLanguageTests
 {
     public class FilterVisitorTests
     {
-        private readonly MockItem _adventureProject = new MockItem() { Uuid = Guid.Parse("7688bae9-4e72-4630-a553-a3b0d9ffb3bb"), Id = 5, Project = "adventure" };
-        private readonly MockItem _castleProject = new MockItem() { Uuid = Guid.Parse("e7be5c17-4f4e-45f4-af4b-bd87a9ad9d87"), Id = 10, Project = "castle" };
+        private readonly MockItem _adventureProject = new MockItem() { Uuid = Guid.Parse("7688bae9-4e72-4630-a553-a3b0d9ffb3bb"), Id = 5, Project = "adventure", Due = DateTime.UtcNow };
+        private readonly MockItem _castleProject = new MockItem() { Uuid = Guid.Parse("e7be5c17-4f4e-45f4-af4b-bd87a9ad9d87"), Id = 10, Project = "castle", Due = DateTime.UtcNow };
 
         [Fact]
         public void TestQuery_EqualsOnQuotedString()
@@ -144,6 +149,13 @@ namespace TaskPrincess.DomainLanguageTests
             Assert.False(query2.Invoke(_castleProject));
         }
 
+        [Fact]
+        public void TestQuery_DateOperator()
+        {
+            var query = BuildQuery("due.after:socw");
+            Assert.True(query.Invoke(_adventureProject));
+        }
+
         private Func<MockItem, bool> BuildQuery(string text)
         {
             var inputStream = new AntlrInputStream(text);
@@ -151,7 +163,9 @@ namespace TaskPrincess.DomainLanguageTests
             var commonTokenStream = new CommonTokenStream(filterLexer);
             var filterParser = new FilterParser(commonTokenStream);
             var context = filterParser.query();
-            var visitor = new FilterVisitor<MockItem>();
+            var weekParser = new WeekDatesBehavior();
+            var dateParser = new DateParser(new List<IDateParserBehavior>() { weekParser }, new DateParserConfig());
+            var visitor = new FilterVisitor<MockItem>(dateParser);
             var expression = visitor.Visit(context);
             return expression.Compile();
         }
@@ -163,5 +177,6 @@ namespace TaskPrincess.DomainLanguageTests
         public string Project { get; set; }
         public Guid Uuid { get; set; }
         public int Id { get; set; }
+        public DateTime Due { get; set; }
     }
 }
