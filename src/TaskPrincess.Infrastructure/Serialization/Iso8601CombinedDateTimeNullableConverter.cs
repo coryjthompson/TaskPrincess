@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -11,7 +12,7 @@ namespace TaskPrincess.Infrastructure.Serilization
         public override DateTime? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             var result = reader.GetString();
-            return string.IsNullOrEmpty(result) ? null : (DateTime?)DateTime.ParseExact(result, FormatString, null);
+            return string.IsNullOrEmpty(result) ? null : (DateTime?)DateTime.ParseExact(result, FormatString, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind);
         }
 
         public override void Write(Utf8JsonWriter writer, DateTime? value, JsonSerializerOptions options)
